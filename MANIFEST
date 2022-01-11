@@ -1,0 +1,18 @@
+aot2dox
+Build
+Build.PL
+Doxyfile
+lib/XPO/AOT2Dox.pm
+lib/XPO/Convert/Dox.pm
+LICENSE
+MANIFEST			This list of files
+MANIFEST.bak
+MANIFEST.SKIP
+MANIFEST.SKIP.bak
+README.md
+test/class-extends.xpo
+test/class-implements.xpo
+test/class-public.xpo
+test/enum.xpo
+test/interface.xpo
+test/job.xpo

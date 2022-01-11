@@ -1,0 +1,20 @@
+---
+abstract: 'Convert XPO to Doxygen/CS sources'
+author:
+  - unknown
+build_requires:
+  Test::More: '0'
+dynamic_config: 0
+generated_by: 'Module::Build version 0.4231, CPAN::Meta::Converter version 2.150010'
+license: unknown
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: '1.4'
+name: xpo2dox
+requires:
+  Git: '0'
+resources:
+  bugtracker: https://github.com/gflohr/xpo2doc/issues
+  repository: https://github.com/gflohr/xpo2doc
+version: v0.1.0
+x_serialization_backend: 'CPAN::Meta::YAML version 0.018'

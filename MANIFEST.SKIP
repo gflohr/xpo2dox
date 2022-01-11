@@ -1,0 +1,6 @@
+^output.*
+^\.git
+^\.vscode
+^_build
+^MYMETA\.yml$
+^MYMETA\.json$
