@@ -248,6 +248,8 @@ Informative output:
   -h, --help                  display this help and exit
   -V, --version               output version information and exit
 
+Try `perldoc $program_name` for more detailed usage information.
+
 Report bugs at https://github.com/gflohr/xpo2dox/issues
 EOF
 

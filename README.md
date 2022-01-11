@@ -48,11 +48,16 @@ Install the Perl module `Devel::Cover`.  Then:
 $ cover -t
 ```
 
+## Usage
+
+Try `./aot2dox --help` for basic usage information or `perldoc ./aot2dox`
+for extensive usage documentation.
+
 ## Thanks
 
 Thanks to Dimitri van Heesch and all the contributors for maintaining [Doxygen](https://www.doxygen.nl) since 1997. Your tool has brought so much value to me for many many years! ❤️
 
-## Usage
+## Create Code Documentation With Doxygen
 
 If you have `doxygen` on your search path, then you can just enter
 
