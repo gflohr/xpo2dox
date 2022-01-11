@@ -63,6 +63,7 @@ sub run {
 
 	if (-e $outdir) {
 		if ($self->{force}) {
+			$self->info("cleaning output directory '$outdir'");
 			remove_tree $outdir;
 			my $saved_errno = $!;
 			if (-e $outdir) {
