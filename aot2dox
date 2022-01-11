@@ -1,28 +1,45 @@
-#!/bin/bash
-#
-# Convert all AX XPO files of an AOT export to files which contain only code.
-#
-# The converted files will be stored in a tree which is similar to
-# the source tree. Files will be named *.xpo
-#
-# To check the progress, you can use the watch command and compare the number of
-# files in source and target:
-#
-# watch -n 5 'find ../igus/ax40 -type f | wc -l; find ./ax40 -type f | wc -l'
-#
-# Usage:
-#
-# aot2dox SOURCE TARGET
-#
-#    SOURCE    Directory containing a checkout of our AX40 AOT
-#
-#    TARGET    Name of a directory to receive the code-only XPO files.
-#              This directory will be erased at the beginning of the script.
-#              It will be recreated from scratch then.
-#
-# TODO ensure that the target folder can be specified. At the moment ax40 is hard coded.
-# TODO error checking
-#
+#! /usr/bin/env perl
+
+=head1 NAME
+
+aot2dox - Convert AX Export XPO Files to C# Pseudo Code
+
+=head1 SYNOPSIS
+
+    ./aot2dox SOURCEDIR OUTPUTDIR
+
+    SOURCE    Directory containing a checkout of our AX40 AOT
+
+    TARGET    Name of a directory to receive the code-only XPO files.
+              This directory will be erased at the beginning of the script.
+              It will be recreated from scratch then.
+
+=head1 DESCRIPTION
+
+Convert all AX XPO files of an AOT export to files which contain only code.
+
+The converted files will be stored in a tree which is similar to
+the source tree. Files will be named *.xpo.cs.
+
+To check the progress, you can use the watch command and compare the number of
+files in source and target:
+
+    watch -n 5 'find ../igus/ax40 -type f | wc -l; find ./ax40 -type f | wc -l'
+
+=head1 SEE ALSO
+
+L<XPO::AOT2Dox>, perl(1)
+
+=cut
+
+use strict;
+
+use XPO::AOT2Dox;
+
+XPO::AOT2Dox->newFromArgv(@ARGV)->run;
+
+__END__
+
 SOURCE_DIR="$1"
 TARGET_DIR="$2"
 
