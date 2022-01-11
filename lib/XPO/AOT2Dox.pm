@@ -91,6 +91,10 @@ sub run {
 			}
 			open my $fh, '>', $outpath
 				or die "cannot open '$outpath' for writing: $!\n";
+			$fh->print($cs)
+				or die "cannot write to '$outpath': $!\n";
+			$fh->close
+				or die "cannot close '$outpath': $!\n";
 		};
 		if ($@) {
 			$self->fatal($@);

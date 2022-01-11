@@ -20,17 +20,21 @@ sub convert {
 	my $indent;
 	while (my $line = <$fh>) {
 		$line =~ s/^[ \t]*#//;
+
+		# Strip BOM.
+		$line =~ s/\xef\xbb\xbf//;
+
 		my $in_body = $is_in_class || $is_job;
 	
 		if ($line =~ /^Exportfile for AOT version 1.0 or later/) {
 			$indent = ' ' x 4;
 			$cs .= '/** xpo2dox generated namespace for all classes. */ namespace AX { // '
 				. $line;
-		} elsif (!$in_body && $line =~ /(class)|(interface)/i) {
+		} elsif (!$in_body && $line =~ /^(class|interface)/) {
 			$is_in_class = 1;
 
-			$line =~ s/extends/:/;
-			$line =~ s/implements/:/;
+			$line =~ s/[ \t]extends[ \t]/ : /;
+			$line =~ s/[ \t]implements[ \t]/ : /;
 
 			$cs .= $indent . $line;
 		} elsif ($is_in_class && $line =~ /^}/) {
@@ -60,8 +64,8 @@ sub convert {
 		} elsif ($line =~ /\*\*\*Element: END/) {
 			$indent = "";
 
-			$cs .= $indent . '} // ' . $1;
-		} elsif ($2 != "") {
+			$cs .= $indent . '} // ' . $line;
+		} elsif ($line ne "\n") {
 			# Normal line of code
 			$cs .= $indent . $line;
 		} else {
