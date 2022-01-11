@@ -16,9 +16,37 @@ Please keep this in mind when forking and creating pull requests. I might declin
 
 [Doxygen](https://www.doxygen.nl) generates source code documentation from annotated source code files. It supports multiple programming languages. However, Microsoft Dynamics AX 4.0 has been missing until today.
 
-The script [xpo2dox](xpo2dox) acts as an [INPUT_FILTER](https://www.doxygen.nl/manual/config.html#cfg_input_filter) for [Doxygen](https://www.doxygen.nl). It takes the raw [XPO file](https://docs.microsoft.com/en-us/dynamicsax-2012/developer/how-to-export-application-objects-by-using-the-aot?redirectedfrom=MSDN) from `stdin` and converts it to something, that [Doxygen](https://www.doxygen.nl) can interpret as C# code for documentation purpose.
+The script [aot2dox](aot2dox) converts all recognized `.xpo` files from a git
+repository and converts them into something, that [Doxygen](https://www.doxygen.nl) can interpret as C# code for documentation purpose.
 
-[xpo2dox](xpo2dox) is an [awk](https://www.gnu.org/software/gawk/manual/gawk.html) script not using the GNU extensions.
+## Requirements
+
+You need [perl](https://www.perl.org/) which is most probably pre-installed
+on your machine and [git](https://git-scm.com/).
+
+You also need the Perl module [Git](https://metacpan.org/pod/Git) which is
+installed with `git`. If not, try `cpanm Git` or `perl -MCPAN install Git`.
+
+## Testing
+
+### Basics
+
+These commands do more or less the same:
+
+```shell
+$ prove -l
+$ prove -l t/01xpo2dox.t # Run an individual test
+$ perl Build test
+$ perl -Ilib t/01xpo2dox.t # Run an individual test
+```
+
+### Coverage
+
+Install the Perl module `Devel::Cover`.  Then:
+
+```shell
+$ cover -t
+```
 
 ## Thanks
 

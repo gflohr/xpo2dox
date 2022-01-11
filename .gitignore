@@ -3,5 +3,7 @@ doxygen.log
 /.vscode
 /LICENSE
 *.bak
+/*.lock
 /_build
 /blib
+/cover_db
