@@ -5,6 +5,7 @@ use strict;
 use Getopt::Long 2.36 qw(GetOptionsFromArray);
 use Time::HiRes qw(gettimeofday);
 use Git;
+use File::Path qw(make_path remove_tree);
 
 use XPO::Convert::Dox;
 
@@ -58,14 +59,38 @@ sub run {
 
 	my $converter = XPO::Convert::Dox->new;
 	my $srcdir = $self->{source_directory};
+	my $outdir = $self->{output_directory};
+
+	if (-e $outdir) {
+		if ($self->{force}) {
+			remove_tree $outdir;
+			my $saved_errno = $!;
+			if (-e $outdir) {
+				$! = $saved_errno;
+				die "failed to remove output directory '$outdir': $!\n";
+			}
+		} else {
+			die "output directory '$outdir' already exists\n";
+		}
+
+	}
 
 	my $count = 0;
 	foreach my $filename (@$files) {
 		++$count;
 		$self->info("($count/$total) '$filename'");
 		eval {
-			my $path = "$srcdir/$filename";
-			my $cs = $converter->convert($path);
+			my $inpath = "$srcdir/$filename";
+			my $cs = $converter->convert($inpath);
+
+			my $outpath = "$outdir/$filename.cs";
+			my $dir = $outpath;
+			$dir =~ s{/[^/]+$}{};
+			unless (-e $dir) {
+				make_path $dir or die "cannot mkdir '$outdir': $!\n";
+			}
+			open my $fh, '>', $outpath
+				or die "cannot open '$outpath' for writing: $!\n";
 		};
 		if ($@) {
 			$self->fatal($@);
@@ -145,6 +170,7 @@ sub __getOptions {
 
 	GetOptionsFromArray($argv,
 		# Mode of operation.
+		'f|force' => \$options{force},
 		'v|verbose' => \$options{verbose},
 
 		# Informative output.
@@ -211,6 +237,7 @@ File Locations:
 
 Mode of Operation:
 
+  -f, --force                 remove output directory if it exists
   -v, --verbose               enable verbose output on standard error
 
 Informative output:
@@ -262,6 +289,8 @@ Create a conversion object.  B<OPTIONS> must be a possible empty hash reference
 with the following allowed keys:
 
 =over 8
+
+=item B<force> - remove output directory on startup
 
 =item B<verbose> - enable verbose output on standard error
 
