@@ -1,6 +1,7 @@
-html/
+/html
 doxygen.log
-.vscode/
+/.vscode
 /LICENSE
 *.bak
-_build/
+/_build
+/blib
