@@ -21,11 +21,6 @@ Convert all AX XPO files of an AOT export to files which contain only code.
 The converted files will be stored in a tree which is similar to
 the source tree. Files will be named *.xpo.cs.
 
-To check the progress, you can use the watch command and compare the number of
-files in source and target:
-
-    watch -n 5 'find ../igus/ax40 -type f | wc -l; find ./ax40 -type f | wc -l'
-
 =head1 SEE ALSO
 
 L<XPO::AOT2Dox>, perl(1)

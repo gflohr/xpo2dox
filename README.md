@@ -39,13 +39,13 @@ $ perl Build install
 ## Running
 
 ```shell
-$ perl -Ilib aot2dox /path/to/ax40/checkout output-cs
+$ perl -Ilib aot2dox --verbose /path/to/ax40/checkout output-cs
 ```
 
 If you have installed the module, you can do like this:
 
 ```shell
-$ aot2dox /path/to/ax40/checkout output-cs
+$ aot2dox --verbose /path/to/ax40/checkout output-cs
 ```
 
 ## Testing
