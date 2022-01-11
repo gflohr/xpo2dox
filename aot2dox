@@ -36,6 +36,8 @@ use strict;
 
 use XPO::AOT2Dox;
 
+autoflush STDERR, 1;
+
 XPO::AOT2Dox->newFromArgv(@ARGV)->run;
 
 __END__
