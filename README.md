@@ -27,6 +27,27 @@ on your machine and [git](https://git-scm.com/).
 You also need the Perl module [Git](https://metacpan.org/pod/Git) which is
 installed with `git`. If not, try `cpanm Git` or `perl -MCPAN install Git`.
 
+## Build and Install
+
+There is no need to install this module. If you cannot help, then go like this:
+
+```shell
+$ perl Build
+$ perl Build install
+```
+
+## Running
+
+```shell
+$ perl -Ilib aot2dox /path/to/ax40/checkout output-cs
+```
+
+If you have installed the module, you can do like this:
+
+```shell
+$ aot2dox /path/to/ax40/checkout output-cs
+```
+
 ## Testing
 
 ### Basics
